@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "GetEmployees";
+}
+
+<link href="~/MyStyle/MyStyle.css" rel="stylesheet" />
+<script src="~/AngularScripts/EmployeeScript.js"></script>
+<h2>GetEmployees</h2>
+
+<div ng-app="secondModule">
+    <div ng-controller="secondController">
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="emp in employees">
+                    <td>{{emp.Id}}</td>
+                    <td>{{emp.Name}}</td>
+                    <td>{{emp.Gender}}</td>
+                    <td>{{emp.Salary}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

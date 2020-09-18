@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<script src="~/AngularScripts/MyScript.js"></script>
+<link href="~/MyStyle/MyStyle.css" rel="stylesheet" />
+<script src="~/AngularScripts/CustomFilters.js"></script>
+
+<div ng-app="myModule">
+    <input type="checkbox" ng-model="hideSalary" /> Hide Salary
+    <br /><br />
+    <div ng-controller="myController">
+        Select View:
+        <select ng-model="employeeView">
+            <option value="GetEmployeeList.cshtml">List</option>
+            <option value="GetEmployeeList.cshtml">Table</option>
+        </select>
+        <br /><br />
+        <div ng-include="employeeView"></div>
+        <table>
+            <thead>
+                <tr>
+                    <th ng-click="sortData('name')">
+                        Name <div ng-class="getSortClass('name')"></div>
+                    </th>
+                    <th ng-click="sortData('dateOfBirth')">
+                        Date of Birth <div ng-class="getSortClass('dateOfBirth')"></div>
+                    </th>
+                    <th ng-click="sortData('gender')">
+                        Gender <div ng-class="getSortClass('gender')"></div>
+                    </th>
+                    <th ng-click="sortData('salary')" ng-hide="hideSalary">
+                        Salary <div ng-class="getSortClass('salary')"></div>
+                    </th>
+                    <th ng-click="sortData('salary')" ng-show="hideSalary">
+                        Salary <div ng-class="getSortClass('salary')"></div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="employee in employees | orderBy:sortColumn:reverseSort">
+                    <td> {{ employee.name }} </td>
+                    <td> {{ employee.dateOfBirth | date:"dd/MM/yyyy" }} </td>
+                    <td> {{ employee.gender | gender }} </td>
+                    <td ng-hide="hideSalary"> {{ employee.salary  }} </td>
+                    <td ng-show="hideSalary"> #### </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
